@@ -8,8 +8,8 @@ export default async function Home() {
   
   return (
     <div>
-      <ul>
-        
+        <h1 className="text-5xl font-bold">Board list</h1>
+      <ul className="flex flex-col gap-2">
         {boards.map( (board) =>(
           <BoardCard key={board.id} board={board} />
         ))}
