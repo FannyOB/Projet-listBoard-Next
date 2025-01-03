@@ -1,20 +1,40 @@
-import React from 'react'
+import { notFound } from "next/navigation";
+import { Proposition } from "~/src/components/proposition/PropositionLine";
+import { prisma } from "~/src/db/prisma";
 
-export default function BoardPage({
+export default async function BoardPage({
     params,
-    searchParams,
   }: {
     params: { boardId: string };
-    searchParams?: { [key: string]: string | string[] | undefined };
   }) {
-    //const { boardId } = params; //destructuration
+    const boardId = Number(params.boardId);
+
+    const propositions = await prisma.proposition.findMany({
+      where: {
+        id: boardId,
+      },
+      select: {
+        title: true,
+        id: true,
+        _count: {
+          select: {
+            vote: true,
+          },
+        },
+      },
+    });
+
     //throw new Error('invalid board params')
     return (
-      <div>
-        <h1>Board Page</h1>
-        <p>Slug: {params.boardId}</p>
-        {JSON.stringify(searchParams)}
-      </div>
+      <ul>
+        {propositions.map((proposition) =>(
+          <Proposition 
+            key={proposition.id}
+            voteCount={proposition._count.vote}
+            {...proposition} 
+          />
+        ))}
+      </ul>
     );
   }
   
