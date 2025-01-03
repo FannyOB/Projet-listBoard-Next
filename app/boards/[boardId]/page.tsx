@@ -7,7 +7,7 @@ export default function BoardPage({
     params: { boardId: string };
     searchParams?: { [key: string]: string | string[] | undefined };
   }) {
-    //const { boardId } = params;
+    //const { boardId } = params; //destructuration
     //throw new Error('invalid board params')
     return (
       <div>
