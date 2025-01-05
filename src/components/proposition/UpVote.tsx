@@ -26,7 +26,7 @@ export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
         onError();
       })
       .catch(() => {
-        onError();
+          onError();
       });
   };
 

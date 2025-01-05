@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Proposition } from "~/src/components/proposition/PropositionLine";
 import { prisma } from "~/src/db/prisma";
+import { PropositionForm } from "./PropositionForm";
 
 export default async function BoardPage({
     params,
@@ -11,7 +12,7 @@ export default async function BoardPage({
 
     const propositions = await prisma.proposition.findMany({
       where: {
-        id: boardId,
+        boardId: boardId,
       },
       select: {
         title: true,
@@ -26,15 +27,18 @@ export default async function BoardPage({
 
     //throw new Error('invalid board params')
     return (
-      <ul>
-        {propositions.map((proposition) =>(
-          <Proposition 
-            key={proposition.id}
-            voteCount={proposition._count.vote}
-            {...proposition} 
-          />
-        ))}
-      </ul>
+      <div>
+        <PropositionForm boardId={boardId} />
+        <ul>
+          {propositions.map((proposition) =>(
+            <Proposition 
+              key={proposition.id}
+              voteCount={proposition._count.vote}
+              {...proposition} 
+            />
+          ))}
+        </ul>
+      </div>
     );
   }
   

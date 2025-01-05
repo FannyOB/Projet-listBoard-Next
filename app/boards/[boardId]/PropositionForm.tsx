@@ -9,9 +9,7 @@ type PropositionFormProps = {
     boardId: number;
 }
 
-export const PropositionForm = ({
-    boardId
-}: PropositionFormProps) => {
+export const PropositionForm = ({ boardId }: PropositionFormProps) => {
     const router = useRouter();
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) =>{
@@ -22,7 +20,7 @@ export const PropositionForm = ({
 
         // on va faire un fetch pour appeler l'api
         fetch(`/api/boards/${boardId}/propositions`, {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify({
                 title,
             })
