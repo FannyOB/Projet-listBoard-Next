@@ -19,10 +19,12 @@ export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
       method: 'POST',
     })
       .then((res) => {
+        //affichage de message d'erreur de la librairie hot toast, possibilité de voter 1 fois
+        /*
         if (res.status === 201) {
           router.refresh();
           return;
-        }
+        }*/
         onError();
       })
       .catch(() => {

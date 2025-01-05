@@ -14,6 +14,11 @@ export default async function BoardPage({
       where: {
         boardId: boardId,
       },
+      orderBy: {
+        vote: {
+          _count: 'desc',
+        }
+      },
       select: {
         title: true,
         id: true,
@@ -27,9 +32,9 @@ export default async function BoardPage({
 
     //throw new Error('invalid board params')
     return (
-      <div>
+      <div className="flex flex-col gap-8">
         <PropositionForm boardId={boardId} />
-        <ul>
+        <ul className="flex flex-col gap-4">
           {propositions.map((proposition) =>(
             <Proposition 
               key={proposition.id}

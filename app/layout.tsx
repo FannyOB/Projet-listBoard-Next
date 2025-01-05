@@ -1,5 +1,6 @@
 import Header from "src/components/Header";
 import './globals.css'
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
         <body className='bg-gray-900 text-gray-50'>
           <Header />
           <div className='p-4'>{children}</div>
+          <Providers />
         </body>
     </html>
   )
